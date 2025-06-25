@@ -16,7 +16,10 @@ export class AccountFacade {
 
   deposit(accountNumber: string, amount: number): Observable<void> {
     return this.accountService.deposit(accountNumber, amount).pipe(
-      tap(() => this.loadStatement(accountNumber)),
+      tap(() => {
+        this.snackBarService.showSnackBarInfo('The amount has been deposited successfully');
+        this.loadStatement(accountNumber);
+      }),
       catchError(err =>{
         this.snackBarService.showSnackBarError('Error while depositing'+ err.message);
         return of(undefined)
@@ -26,7 +29,10 @@ export class AccountFacade {
 
   withdraw(accountNumber: string, amount: number): Observable<void> {
     return this.accountService.withdraw(accountNumber, amount).pipe(
-      tap(() => this.loadStatement(accountNumber)),
+      tap(() => {
+        this.snackBarService.showSnackBarInfo('The amount has been withdrawn successfully');
+        this.loadStatement(accountNumber);
+      }),
       catchError(err =>{
         this.snackBarService.showSnackBarError('Error when withdrawing'+ err.message);
         return of(undefined)

@@ -16,10 +16,6 @@ export class SnackBarService {
     this.showSnackBar(message, SnackBarType.Error, action, duration);
   }
 
-  showSnackBarWarning(message:string, action:string='Close', duration: number=3000) {
-    this.showSnackBar(message, SnackBarType.Error, action, duration);
-  }
-
  private showSnackBar(message: string, type: SnackBarType, action: string, duration: number) {
    const config:MatSnackBarConfig = {
      duration,
